@@ -1,4 +1,5 @@
 import 'package:chatting_app/Screens/Signup_screen.dart';
+import 'package:chatting_app/Screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../widgets/social_button.dart';
@@ -174,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // Navigate to HomeScreen after successful login
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (_) => const RegisterScreen()),
+          MaterialPageRoute(builder: (_) => const HomeScreen()),
           (route) => false,
         );
       });

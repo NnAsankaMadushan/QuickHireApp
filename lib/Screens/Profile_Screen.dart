@@ -34,13 +34,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     // Initialize controllers with mock data (replace with actual user data)
-    _nameController.text = "John Doe";
-    _emailController.text = "johndoe@example.com";
-    _phoneController.text = "+1234567890";
-    _addressController.text = "123 Main St";
-    _locationController.text = "New York";
+    _nameController.text = "Asanka Madushan";
+    _emailController.text = "nnamadushan@gmail.com";
+    _phoneController.text = "+94 71 7775 812";
+    _addressController.text = "45, Silver Crest, Kekanadura";
+    _locationController.text = "Matara";
     _selectedGender = "Male";
-    _selectedDate = DateTime(1990, 1, 1);
+    _selectedDate = DateTime(1998, 4, 16);
   }
 
   @override
@@ -155,6 +155,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: SingleChildScrollView(
         child: Container(
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height - AppBar().preferredSize.height,
+          ),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,

@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Text(
-                      'John Doe',  // Replace with actual user name
+                      'Asanka Madushan',  // Replace with actual user name
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
