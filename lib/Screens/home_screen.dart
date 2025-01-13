@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'messaging_screen.dart';
-import 'profile_screen.dart'; // Add this import
+import 'profile_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -76,8 +76,32 @@ class HomeScreen extends StatelessWidget {
         itemCount: 20,
         itemBuilder: (context, index) {
           return ListTile(
-            leading: CircleAvatar(
-              child: Text('${index + 1}'),
+            leading: Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: 2,
+                ),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Image.network(
+                  'https://picsum.photos/200?random=$index',  // Using random parameter to get different images
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return CircleAvatar(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      child: Text(
+                        '${index + 1}',
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    );
+                  },
+                ),
+              ),
             ),
             title: Text('User ${index + 1}'),
             subtitle: Text('Last message from user ${index + 1}'),
