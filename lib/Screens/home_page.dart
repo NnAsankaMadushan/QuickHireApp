@@ -1,4 +1,6 @@
 import 'package:chatting_app/Screens/home_screen.dart';
+import 'package:chatting_app/Screens/notification.dart';
+import 'package:chatting_app/Screens/work_request_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'profile_screen.dart';
@@ -7,6 +9,7 @@ import 'available_duties_screen.dart';
 import 'post_job_screen.dart';
 import 'search_screen.dart';
 import 'jobs_screen.dart';
+// import 'notification_screen.dart'; // Added import for NotificationScreen
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -192,9 +195,14 @@ class _HomeContent extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(width: 8),
-                // Notifications Icon
+                // Notifications Icon with Navigation
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const NotificationScreen()),
+                    );
+                  },
                   icon: const Icon(Icons.notifications_outlined),
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -256,10 +264,13 @@ class _HomeContent extends StatelessWidget {
                       ),
                       _buildActionCard(
                         context,
-                        title: 'Settings',
-                        icon: Icons.settings_outlined,
+                        title: 'Requests',
+                        icon: Icons.request_page_outlined,
                         color: Colors.green,
-                        onTap: () {},
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const WorkerRequestsScreen()),
+                        ),
                       ),
                     ],
                   ).animate().fadeIn(),

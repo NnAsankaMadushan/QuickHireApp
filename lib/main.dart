@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: GoogleFonts.poppinsTextTheme(),
       ),
-      home: const NotificationScreen(),
+      home: const HomePage(),
     );
   }
 }
