@@ -3,6 +3,61 @@ import 'package:chatting_app/Screens/messaging_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+// Define the enum first
+enum JobStatus {
+  pending,
+  accepted,
+}
+
+// Then define the Job class
+class Job {
+  final String title;
+  final String employerName;
+  final String location;
+  final String date;
+  final String time;
+  final String description;
+  final double price;
+  final JobStatus status;
+
+  const Job({
+    required this.title,
+    required this.employerName,
+    required this.location,
+    required this.date,
+    required this.time,
+    required this.description,
+    required this.price,
+    required this.status, // Make status required instead of optional
+  });
+}
+
+// Sample data
+final List<Job> sampleJobs = [
+  Job(
+    title: 'House Cleaning',
+    employerName: 'Jane Smith',
+    location: '123 Main St, City',
+    date: 'Jan 28, 2025',
+    time: '10:00 AM',
+    description:
+        'General house cleaning including dusting, vacuuming, and bathroom cleaning. Expected duration: 3 hours.',
+    price: 75.00,
+    status: JobStatus.pending,
+  ),
+  Job(
+    title: 'Garden Maintenance',
+    employerName: 'Mike Johnson',
+    location: '456 Park Ave, City',
+    date: 'Jan 29, 2025',
+    time: '2:00 PM',
+    description:
+        'Lawn mowing, weeding, and general garden maintenance. Tools will be provided.',
+    price: 60.00,
+    status: JobStatus.accepted,
+  ),
+];
+
 class MyJobsScreen extends StatelessWidget {
   const MyJobsScreen({super.key});
 
@@ -137,31 +192,53 @@ class JobCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            MessagingScreen(userId: 1),
+                        builder: (context) => MessagingScreen(userId: 1),
                       ),
                     );
                   },
                   icon: const Icon(Icons.message_outlined),
                   label: const Text('Message'),
                 ),
-                FilledButton.icon(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            HomePage(),
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.play_arrow_outlined),
-                  label: const Text('Done'),
-                ),
+                _buildStatusButton(context, job.status),
               ],
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildStatusButton(BuildContext context, JobStatus status) {
+    final isAccepted = status == JobStatus.accepted;
+    
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 8,
+      ),
+      decoration: BoxDecoration(
+        color: isAccepted
+            ? Colors.green.withOpacity(0.2)
+            : Colors.orange.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            isAccepted ? Icons.check_circle_outline : Icons.pending_outlined,
+            size: 16,
+            color: isAccepted ? Colors.green : Colors.orange,
+          ),
+          const SizedBox(width: 8),
+          Text(
+            isAccepted ? 'Accepted' : 'Pending',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: isAccepted ? Colors.green : Colors.orange,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+        ],
       ),
     );
   }
@@ -185,48 +262,3 @@ class JobCard extends StatelessWidget {
     );
   }
 }
-
-class Job {
-  final String title;
-  final String employerName;
-  final String location;
-  final String date;
-  final String time;
-  final String description;
-  final double price;
-
-  const Job({
-    required this.title,
-    required this.employerName,
-    required this.location,
-    required this.date,
-    required this.time,
-    required this.description,
-    required this.price,
-  });
-}
-
-// Sample data - Replace this with your actual data from a database or API
-final List<Job> sampleJobs = [
-  Job(
-    title: 'House Cleaning',
-    employerName: 'Jane Smith',
-    location: '123 Main St, City',
-    date: 'Jan 28, 2025',
-    time: '10:00 AM',
-    description:
-        'General house cleaning including dusting, vacuuming, and bathroom cleaning. Expected duration: 3 hours.',
-    price: 75.00,
-  ),
-  Job(
-    title: 'Garden Maintenance',
-    employerName: 'Mike Johnson',
-    location: '456 Park Ave, City',
-    date: 'Jan 29, 2025',
-    time: '2:00 PM',
-    description:
-        'Lawn mowing, weeding, and general garden maintenance. Tools will be provided.',
-    price: 60.00,
-  ),
-  // Add more sample jobs as needed
-];

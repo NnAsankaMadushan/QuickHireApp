@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _screens = [
     const _HomeContent(),  // Extracted home content
     const SearchScreen(), // Your search screen
-    const JobsScreen(),   // Your jobs screen
+    const MyJobsScreen(),   // Your jobs screen
     const ProfileScreen() // Your profile screen
   ];
 
