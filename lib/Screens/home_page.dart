@@ -1,4 +1,5 @@
 import 'package:chatting_app/Screens/home_screen.dart';
+import 'package:chatting_app/Screens/myJobsScreen.dart';
 import 'package:chatting_app/Screens/notification.dart';
 import 'package:chatting_app/Screens/work_request_screen.dart';
 import 'package:flutter/material.dart';
@@ -260,7 +261,10 @@ class _HomeContent extends StatelessWidget {
                         title: 'My Jobs',
                         icon: Icons.assignment_outlined,
                         color: Colors.orange,
-                        onTap: () {},
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const MyJobsScreen())
+                        ),
                       ),
                       _buildActionCard(
                         context,

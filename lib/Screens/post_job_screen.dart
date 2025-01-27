@@ -90,7 +90,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text('Post a Job'),
-        backgroundColor: const Color(0xFF9E72C3),
+        backgroundColor: const Color(0xFF9E72C3).withOpacity(0.2),
         elevation: 0,
       ),
       body: Container(

@@ -10,7 +10,7 @@ class AvailableDutiesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Available Jobs'),
-        backgroundColor: const Color(0xFF9E72C3),
+        backgroundColor: const Color(0xFF9E72C3).withOpacity(0.2),
         elevation: 0,
       ),
       body: Container(
@@ -144,9 +144,12 @@ class AvailableDutiesScreen extends StatelessWidget {
                               const SizedBox(width: 8),
                               Text(
                                 '\$${50 + (index * 5)}/hr',
-                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                               ),
                             ],
                           ),
@@ -175,7 +178,8 @@ class AvailableDutiesScreen extends StatelessWidget {
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color(0xFF9E72C3),
                                     foregroundColor: Colors.white,
-                                    padding: const EdgeInsets.symmetric(vertical: 12),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
