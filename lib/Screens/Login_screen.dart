@@ -74,13 +74,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             if (value.length < 3) {
                               return 'Username must be at least 3 characters long';
                             }
-                            if (value.length > 20) {
-                              return 'Username cannot exceed 20 characters';
-                            }
-                            // Check if username contains only letters, numbers, and underscores
-                            if (!RegExp(r'^[a-zA-Z0-9_]+$').hasMatch(value)) {
-                              return 'Username can only contain letters, numbers, and underscores';
-                            }
                             return null;
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -103,25 +96,22 @@ class _LoginScreenState extends State<LoginScreen> {
                             if (value.length < 8) {
                               return 'Password must be at least 8 characters long';
                             }
-                            if (value.length > 50) {
-                              return 'Password cannot exceed 50 characters';
-                            }
-                            // Check for at least one uppercase letter
-                            if (!value.contains(RegExp(r'[A-Z]'))) {
-                              return 'Password must contain at least one uppercase letter';
-                            }
-                            // Check for at least one lowercase letter
-                            if (!value.contains(RegExp(r'[a-z]'))) {
-                              return 'Password must contain at least one lowercase letter';
-                            }
-                            // Check for at least one number
-                            if (!value.contains(RegExp(r'[0-9]'))) {
-                              return 'Password must contain at least one number';
-                            }
-                            // Check for at least one special character
-                            if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-                              return 'Password must contain at least one special character';
-                            }
+                            // // Check for at least one uppercase letter
+                            // if (!value.contains(RegExp(r'[A-Z]'))) {
+                            //   return 'Password must contain at least one uppercase letter';
+                            // }
+                            // // Check for at least one lowercase letter
+                            // if (!value.contains(RegExp(r'[a-z]'))) {
+                            //   return 'Password must contain at least one lowercase letter';
+                            // }
+                            // // Check for at least one number
+                            // if (!value.contains(RegExp(r'[0-9]'))) {
+                            //   return 'Password must contain at least one number';
+                            // }
+                            // // Check for at least one special character
+                            // if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+                            //   return 'Password must contain at least one special character';
+                            // }
                             return null;
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
