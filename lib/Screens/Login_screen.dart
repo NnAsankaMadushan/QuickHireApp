@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../widgets/social_button.dart';
 import 'register_screen.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -156,19 +158,36 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void _handleLogin() {
+  void _handleLogin() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
-      // Simulate login process
-      Future.delayed(const Duration(seconds: 2), () {
-        setState(() => _isLoading = false);
-        // Navigate to HomeScreen after successful login
+
+      final response = await http.post(
+        Uri.parse("http://192.168.134.204:5000/api/auth/login"),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          "username": _usernameController.text,
+          "password": _passwordController.text,
+        }),
+      );
+
+      setState(() => _isLoading = false);
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        print("Login Successful! Token: ${data['token']}");
+
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (_) => const HomeScreen()),
           (route) => false,
         );
-      });
+      } else {
+        print("Login Failed: ${jsonDecode(response.body)['msg']}");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Login failed: ${jsonDecode(response.body)['msg']}")),
+        );
+      }
     }
   }
 }
