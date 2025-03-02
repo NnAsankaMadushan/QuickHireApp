@@ -1,11 +1,8 @@
 import 'package:chatting_app/Screens/Signup_screen.dart';
-import 'package:chatting_app/Screens/home_screen.dart';
+import 'package:chatting_app/Screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../widgets/social_button.dart';
-import 'register_screen.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,7 +13,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  bool _isLoading = false;
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -98,22 +94,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             if (value.length < 8) {
                               return 'Password must be at least 8 characters long';
                             }
-                            // // Check for at least one uppercase letter
-                            // if (!value.contains(RegExp(r'[A-Z]'))) {
-                            //   return 'Password must contain at least one uppercase letter';
-                            // }
-                            // // Check for at least one lowercase letter
-                            // if (!value.contains(RegExp(r'[a-z]'))) {
-                            //   return 'Password must contain at least one lowercase letter';
-                            // }
-                            // // Check for at least one number
-                            // if (!value.contains(RegExp(r'[0-9]'))) {
-                            //   return 'Password must contain at least one number';
-                            // }
-                            // // Check for at least one special character
-                            // if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-                            //   return 'Password must contain at least one special character';
-                            // }
                             return null;
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -122,10 +102,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: _isLoading ? null : _handleLogin,
-                            child: _isLoading
-                                ? const CircularProgressIndicator()
-                                : const Text('Login'),
+                            onPressed: _handleLogin,
+                            child: const Text('Login'),
                           ),
                         ).animate().fadeIn(delay: 400.ms).slideY(),
                         const SizedBox(height: 16),
@@ -158,36 +136,14 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void _handleLogin() async {
+  void _handleLogin() {
     if (_formKey.currentState!.validate()) {
-      setState(() => _isLoading = true);
-
-      final response = await http.post(
-        Uri.parse("http://192.168.134.204:5000/api/auth/login"),
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode({
-          "username": _usernameController.text,
-          "password": _passwordController.text,
-        }),
+      print("Login Button Pressed");
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (_) => const HomePage()),
+        (route) => false,
       );
-
-      setState(() => _isLoading = false);
-
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        print("Login Successful! Token: ${data['token']}");
-
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (_) => const HomeScreen()),
-          (route) => false,
-        );
-      } else {
-        print("Login Failed: ${jsonDecode(response.body)['msg']}");
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Login failed: ${jsonDecode(response.body)['msg']}")),
-        );
-      }
     }
   }
 }

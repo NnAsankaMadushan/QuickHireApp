@@ -147,7 +147,7 @@ class _HomeContent extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'John Doe',
+                            'Asanka Madushan',
                             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),

@@ -1,4 +1,5 @@
 import 'package:chatting_app/Screens/Login_screen.dart';
+import 'package:chatting_app/Screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:image_picker/image_picker.dart';
@@ -309,7 +310,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (_) => const HomeScreen()),
+          MaterialPageRoute(builder: (_) => const HomePage()),
           (route) => false,
         );
       });
